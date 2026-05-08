@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web3 Mastery — Belajar Web3 dari Nol ke Expert</title>
+<style>
+:root {
+  --bg: #0a0a0f;
+  --bg2: #12121a;
+  --bg3: #1a1a26;
+  --bg4: #22223a;
+  --accent: #6c63ff;
+  --accent2: #a78bfa;
+  --accent3: #38bdf8;
+  --accent4: #34d399;
+  --gold: #fbbf24;
+  --red: #f87171;
+  --text: #f1f0ff;
+  --text2: #a9a8c8;
+  --text3: #6b6a8a;
+  --border: rgba(108,99,255,0.18);
+  --border2: rgba(108,99,255,0.35);
+  --card: #16162a;
+  --card2: #1e1e35;
+  --grad1: linear-gradient(135deg,#6c63ff,#38bdf8);
+  --grad2: linear-gradient(135deg,#a78bfa,#34d399);
+  --shadow: 0 4px 32px rgba(108,99,255,0.13);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.7;min-height:100vh}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,15,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);height:60px;display:flex;align-items:center;padding:0 24px;gap:16px}
+.nav-logo{font-size:18px;font-weight:700;background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap}
+.nav-search{flex:1;max-width:340px;position:relative;margin-left:auto}
+.nav-search input{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:7px 12px 7px 34px;color:var(--text);font-size:13px;outline:none;transition:border .2s}
+.nav-search input:focus{border-color:var(--accent)}
+.nav-search svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:15px;height:15px;stroke:var(--text3);fill:none}
+.nav-progress{margin-left:16px;font-size:12px;color:var(--text2);white-space:nowrap;display:flex;align-items:center;gap:8px}
+.prog-bar{width:80px;height:5px;background:var(--bg4);border-radius:99px;overflow:hidden}
+.prog-fill{height:100%;background:var(--grad1);border-radius:99px;transition:width .4s}
+.nav-btn{background:var(--accent);color:#fff;border:none;border-radius:7px;padding:6px 14px;font-size:13px;cursor:pointer;font-weight:600;white-space:nowrap}
+
+/* SIDEBAR */
+.layout{display:flex;min-height:100vh;padding-top:60px}
+aside{width:290px;min-width:290px;background:var(--bg2);border-right:1px solid var(--border);position:fixed;top:60px;bottom:0;left:0;overflow-y:auto;padding-bottom:32px;transition:transform .3s}
+aside::-webkit-scrollbar{width:4px}
+aside::-webkit-scrollbar-track{background:transparent}
+aside::-webkit-scrollbar-thumb{background:var(--border2);border-radius:99px}
+.sidebar-header{padding:18px 20px 10px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--text3)}
+.phase-group{margin-bottom:4px}
+.phase-toggle{display:flex;align-items:center;gap:8px;padding:9px 20px;cursor:pointer;font-size:13px;font-weight:600;color:var(--text2);transition:color .2s;user-select:none}
+.phase-toggle:hover{color:var(--text)}
+.phase-toggle .ph-icon{width:18px;height:18px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
+.phase-toggle .arr{margin-left:auto;font-size:10px;transition:transform .2s;color:var(--text3)}
+.phase-toggle.open .arr{transform:rotate(90deg)}
+.phase-modules{display:none;padding:2px 0 4px}
+.phase-toggle.open + .phase-modules{display:block}
+.mod-link{display:flex;align-items:center;gap:8px;padding:7px 20px 7px 40px;font-size:13px;color:var(--text3);cursor:pointer;transition:all .15s;border-left:2px solid transparent;text-decoration:none}
+.mod-link:hover{color:var(--text);background:var(--bg3)}
+.mod-link.active{color:var(--accent2);border-left-color:var(--accent);background:rgba(108,99,255,0.08)}
+.mod-link .done-icon{width:14px;height:14px;border-radius:50%;border:1.5px solid var(--text3);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;margin-left:auto}
+.mod-link.completed .done-icon{background:var(--accent4);border-color:var(--accent4);color:#fff}
+
+/* MAIN */
+main{margin-left:290px;flex:1;padding:0}
+.module-content{max-width:820px;margin:0 auto;padding:40px 32px 80px}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#0d0d1f 0%,#12122a 100%);padding:80px 32px 60px;text-align:center;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:500px;height:500px;background:radial-gradient(circle,rgba(108,99,255,0.12) 0%,transparent 70%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(108,99,255,0.15);border:1px solid var(--border2);border-radius:99px;padding:5px 14px;font-size:12px;color:var(--accent2);margin-bottom:20px}
+.hero h1{font-size:42px;font-weight:800;background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:14px;line-height:1.2}
+.hero p{font-size:16px;color:var(--text2);max-width:560px;margin:0 auto 28px}
+.hero-stats{display:flex;gap:32px;justify-content:center;flex-wrap:wrap;margin-top:24px}
+.hero-stat{text-align:center}
+.hero-stat .num{font-size:28px;font-weight:700;background:var(--grad2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-stat .lbl{font-size:12px;color:var(--text3);margin-top:2px}
+.start-btn{background:var(--grad1);color:#fff;border:none;border-radius:10px;padding:13px 32px;font-size:15px;font-weight:700;cursor:pointer;transition:opacity .2s;display:inline-block}
+.start-btn:hover{opacity:.88}
+
+/* SECTION CONTENT */
+.section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--accent);margin-bottom:8px}
+.module-title{font-size:30px;font-weight:800;color:var(--text);margin-bottom:8px;line-height:1.25}
+.module-desc{font-size:15px;color:var(--text2);margin-bottom:28px;border-bottom:1px solid var(--border);padding-bottom:24px}
+.module-meta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px}
+.meta-badge{display:inline-flex;align-items:center;gap:5px;background:var(--bg3);border:1px solid var(--border);border-radius:99px;padding:4px 12px;font-size:12px;color:var(--text2)}
+.meta-badge span{color:var(--accent2)}
+
+/* CONTENT BLOCKS */
+.content-block{margin-bottom:36px}
+.block-title{font-size:18px;font-weight:700;color:var(--text);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.block-num{width:28px;height:28px;border-radius:7px;background:var(--grad1);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.prose{color:var(--text2);font-size:15px;line-height:1.8}
+.prose strong{color:var(--text);font-weight:600}
+.prose em{color:var(--accent2)}
+.prose h4{color:var(--text);font-size:15px;font-weight:700;margin:16px 0 6px}
+.prose ul{padding-left:20px;margin:10px 0}
+.prose ul li{margin-bottom:6px}
+.prose ol{padding-left:20px;margin:10px 0}
+.prose ol li{margin-bottom:6px}
+
+/* CALLOUT BOXES */
+.callout{border-radius:10px;padding:16px 20px;margin:16px 0;display:flex;gap:12px;align-items:flex-start}
+.callout.info{background:rgba(56,189,248,0.08);border-left:3px solid var(--accent3)}
+.callout.warn{background:rgba(251,191,36,0.08);border-left:3px solid var(--gold)}
+.callout.danger{background:rgba(248,113,113,0.08);border-left:3px solid var(--red)}
+.callout.success{background:rgba(52,211,153,0.08);border-left:3px solid var(--accent4)}
+.callout-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+.callout-body{font-size:14px;color:var(--text2);line-height:1.7}
+.callout-body strong{color:var(--text)}
+
+/* ANALOGY CARD */
+.analogy-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin:16px 0;position:relative;overflow:hidden}
+.analogy-card::before{content:'💡 ANALOGI DUNIA NYATA';font-size:10px;font-weight:700;letter-spacing:1px;color:var(--gold);display:block;margin-bottom:10px}
+.analogy-card p{color:var(--text2);font-size:14px;line-height:1.8}
+
+/* VISUAL BOX */
+.visual-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin:16px 0;font-family:monospace;font-size:13px;line-height:2;color:var(--text2);overflow-x:auto}
+.visual-box .label{font-size:10px;font-weight:700;letter-spacing:1px;color:var(--accent);font-family:'Segoe UI',sans-serif;margin-bottom:10px;display:block}
+.v-block{background:var(--bg3);border:1px solid var(--border2);border-radius:7px;padding:10px 14px;margin:6px 0;color:var(--text)}
+.v-block .vb-title{font-size:11px;color:var(--accent2);font-weight:700;margin-bottom:4px}
+.v-block .vb-row{display:flex;justify-content:space-between;font-size:12px;color:var(--text3);border-bottom:1px solid var(--border);padding:3px 0}
+.v-block .vb-row:last-child{border-bottom:none}
+.v-arrow{text-align:center;color:var(--accent);font-size:18px;margin:4px 0}
+
+/* GLOSSARY */
+.glossary-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+.gloss-item{background:var(--card);border:1px solid var(--border);border-radius:9px;padding:12px 14px}
+.gloss-term{font-size:13px;font-weight:700;color:var(--accent2);margin-bottom:4px}
+.gloss-def{font-size:12px;color:var(--text3);line-height:1.6}
+
+/* RISK TABLE */
+.risk-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+.risk-table th{background:var(--bg3);color:var(--text2);font-weight:600;padding:10px 14px;text-align:left;border-bottom:1px solid var(--border)}
+.risk-table td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--text3);vertical-align:top}
+.risk-table tr:last-child td{border-bottom:none}
+.risk-badge{display:inline-block;padding:2px 8px;border-radius:99px;font-size:11px;font-weight:600}
+.risk-high{background:rgba(248,113,113,0.15);color:#f87171}
+.risk-med{background:rgba(251,191,36,0.15);color:#fbbf24}
+.risk-low{background:rgba(52,211,153,0.15);color:#34d399}
+
+/* PRACTICE BOX */
+.practice-box{background:var(--card);border:1px solid var(--accent);border-radius:12px;padding:24px;margin:16px 0}
+.practice-header{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.practice-icon{width:36px;height:36px;background:var(--grad1);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.practice-title{font-size:16px;font-weight:700;color:var(--text)}
+.practice-sub{font-size:12px;color:var(--text3)}
+.step-list{list-style:none;margin:12px 0}
+.step-list li{display:flex;gap:12px;margin-bottom:12px;align-items:flex-start}
+.step-num{width:24px;height:24px;border-radius:50%;background:var(--bg3);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--accent2);flex-shrink:0;margin-top:2px}
+.step-text{font-size:14px;color:var(--text2);line-height:1.7}
+.step-text a{color:var(--accent3);text-decoration:none}
+.step-text a:hover{text-decoration:underline}
+.step-text code{background:var(--bg4);padding:1px 6px;border-radius:4px;font-size:12px;color:var(--gold)}
+
+/* RESOURCES TABLE */
+.res-table{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0}
+.res-table th{background:var(--bg3);color:var(--accent);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;padding:10px 12px;text-align:left;border-bottom:1px solid var(--border)}
+.res-table td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top}
+.res-table tr:hover td{background:var(--bg3)}
+.res-table td a{color:var(--accent3);text-decoration:none;font-weight:500}
+.res-table td a:hover{text-decoration:underline}
+.tag{display:inline-block;padding:2px 7px;border-radius:5px;font-size:11px;font-weight:600;margin:1px}
+.tag-free{background:rgba(52,211,153,0.12);color:#34d399}
+.tag-paid{background:rgba(248,113,113,0.12);color:#f87171}
+.tag-tools{background:rgba(56,189,248,0.12);color:#38bdf8}
+.tag-docs{background:rgba(167,139,250,0.12);color:#a78bfa}
+.tag-explorer{background:rgba(251,191,36,0.12);color:#fbbf24}
+
+/* QUIZ */
+.quiz-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px;margin:12px 0}
+.quiz-q{font-size:14px;font-weight:600;color:var(--text);margin-bottom:14px}
+.quiz-opts{display:flex;flex-direction:column;gap:8px}
+.quiz-opt{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:13px;color:var(--text2);cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:10px}
+.quiz-opt:hover{border-color:var(--accent);color:var(--text)}
+.quiz-opt.correct{border-color:var(--accent4);background:rgba(52,211,153,0.1);color:var(--accent4)}
+.quiz-opt.wrong{border-color:var(--red);background:rgba(248,113,113,0.1);color:var(--red)}
+.quiz-letter{width:22px;height:22px;border-radius:50%;background:var(--bg4);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+.quiz-feedback{margin-top:12px;padding:10px 14px;border-radius:8px;font-size:13px;display:none}
+.quiz-feedback.show{display:block}
+.quiz-feedback.ok{background:rgba(52,211,153,0.1);color:var(--accent4);border:1px solid var(--accent4)}
+.quiz-feedback.bad{background:rgba(248,113,113,0.1);color:var(--red);border:1px solid var(--red)}
+
+/* JSON BLOCK */
+.json-block{background:#0d1117;border:1px solid var(--border);border-radius:10px;padding:18px;font-family:monospace;font-size:12px;line-height:1.8;overflow-x:auto;position:relative}
+.json-block .copy-btn{position:absolute;top:10px;right:10px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:4px 10px;font-size:11px;color:var(--text2);cursor:pointer;transition:all .2s}
+.json-block .copy-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.json-key{color:#79c0ff}
+.json-str{color:#a5d6ff}
+.json-bool{color:#56d364}
+.json-num{color:#ffa657}
+.json-punc{color:#8b949e}
+
+/* PROGRESS TRACKER */
+.mod-complete-btn{width:100%;background:var(--grad2);color:#fff;border:none;border-radius:10px;padding:14px;font-size:15px;font-weight:700;cursor:pointer;margin-top:32px;transition:opacity .2s}
+.mod-complete-btn:hover{opacity:.88}
+.mod-complete-btn.done{background:var(--bg3);color:var(--accent4);border:1px solid var(--accent4)}
+
+/* OVERVIEW GRID */
+.phase-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;padding:32px}
+.phase-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;cursor:pointer;transition:all .2s;text-decoration:none}
+.phase-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.phase-card-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:12px}
+.phase-card-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px}
+.phase-card-sub{font-size:12px;color:var(--text3);margin-bottom:10px}
+.phase-card-prog{height:4px;background:var(--bg4);border-radius:99px;overflow:hidden}
+.phase-card-prog-fill{height:100%;background:var(--grad1);border-radius:99px}
+
+/* MODULE NAV FOOTER */
+.mod-nav{display:flex;justify-content:space-between;gap:12px;margin-top:48px;padding-top:24px;border-top:1px solid var(--border)}
+.mod-nav-btn{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 18px;cursor:pointer;font-size:13px;color:var(--text2);transition:all .2s;flex:1}
+.mod-nav-btn:hover{border-color:var(--accent);color:var(--text)}
+.mod-nav-btn.next{justify-content:flex-end;text-align:right}
+.mod-nav-btn .nav-label{font-size:11px;color:var(--text3)}
+.mod-nav-btn .nav-name{font-weight:600;color:var(--text)}
+
+/* MOBILE */
+.sidebar-toggle{display:none;background:none;border:none;color:var(--text);cursor:pointer;padding:8px}
+@media(max-width:800px){
+  aside{transform:translateX(-100%);z-index:999}
+  aside.open{transform:translateX(0)}
+  main{margin-left:0}
+  .sidebar-toggle{display:flex}
+  .glossary-grid{grid-template-columns:1fr}
+  .hero h1{font-size:28px}
+}
+
+/* LOADING */
+.loading{display:flex;align-items:center;justify-content:center;height:200px;color:var(--text3);font-size:14px;gap:10px}
+.spinner{width:20px;height:20px;border:2px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:28px;margin:12px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:var(--border2);border-radius:99px}
+.tl-item{position:relative;margin-bottom:18px}
+.tl-dot{width:16px;height:16px;border-radius:50%;background:var(--accent);position:absolute;left:-24px;top:3px;border:2px solid var(--bg)}
+.tl-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:3px}
+.tl-body{font-size:13px;color:var(--text3);line-height:1.7}
+.tl-year{font-size:11px;color:var(--accent2);margin-bottom:3px;font-weight:600}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+  <div class="nav-logo">⬡ Web3 Mastery</div>
+  <div class="nav-search">
+    <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" placeholder="Cari modul..." id="searchInput" oninput="searchModules()">
+  </div>
+  <div class="nav-progress">
+    <span id="progText">0/48 modul</span>
+    <div class="prog-bar"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+  </div>
+</nav>
+
+<!-- SIDEBAR -->
+<aside id="sidebar">
+  <div class="sidebar-header">Kurikulum Web3</div>
+  <div id="sidebarContent"></div>
+</aside>
+
+<!-- MAIN -->
+<main>
+  <div id="mainContent"></div>
+</main>
+
+<script>
+const CURRICULUM = [
+  {
+    phase:0, color:'#6c63ff', emoji:'🧠', title:'Mindset & Orientasi',
+    modules:[
+      {id:'0-1', title:'Apa itu Web3?', sub:'Orientasi & Visi'},
+      {id:'0-2', title:'Sejarah Internet: Web1→Web2→Web3', sub:'Evolusi Digital'},
+      {id:'0-3', title:'Sejarah Blockchain & Bitcoin', sub:'2008–Sekarang'},
+      {id:'0-4', title:'Mindset di Web3', sub:'Investor vs Builder vs Researcher'},
+      {id:'0-5', title:'Cara Belajar Web3 yang Benar', sub:'Avoid Scam Info'},
+      {id:'0-6', title:'Setup Environment Belajar', sub:'Tools & Keamanan Dasar'},
+    ]
+  },
+  {
+    phase:1, color:'#38bdf8', emoji:'🔐', title:'Fondasi Kriptografi',
+    modules:[
+      {id:'1-1', title:'Kriptografi Dasar', sub:'Hashing, Enkripsi, Key'},
+      {id:'1-2', title:'Public Key & Private Key', sub:'Pasangan Kunci Kriptografi'},
+      {id:'1-3', title:'Digital Signature', sub:'Tanda Tangan Digital'},
+      {id:'1-4', title:'Merkle Tree', sub:'Struktur Data Kriptografis'},
+      {id:'1-5', title:'Desentralisasi & Trustless System', sub:'Inti Filosofi Web3'},
+    ]
+  },
+  {
+    phase:2, color:'#34d399', emoji:'⛓', title:'Blockchain Core',
+    modules:[
+      {id:'2-1', title:'Struktur Block & Transaksi', sub:'Anatomi Blockchain'},
+      {id:'2-2', title:'Node, Validator & Miner', sub:'Pelaku Jaringan'},
+      {id:'2-3', title:'Mempool & Gas Fee', sub:'Fee Market & Antrian TX'},
+      {id:'2-4', title:'Proof of Work (PoW)', sub:'Mekanisme Konsensus #1'},
+      {id:'2-5', title:'Proof of Stake (PoS)', sub:'Mekanisme Konsensus #2'},
+      {id:'2-6', title:'DPoS, BFT & Slashing', sub:'Konsensus Lanjutan'},
+      {id:'2-7', title:'Finality, Hard Fork & Soft Fork', sub:'Finalitas & Perubahan'},
+      {id:'2-8', title:'Blockchain Trilemma & L1/L2', sub:'Skalabilitas'},
+      {id:'2-9', title:'Rollups & Modular Blockchain', sub:'Arsitektur Modern'},
+      {id:'2-10', title:'MEV & Sequencer', sub:'Maximal Extractable Value'},
+    ]
+  },
+  {
+    phase:3, color:'#fbbf24', emoji:'👛', title:'Wallets & Security Dasar',
+    modules:[
+      {id:'3-1', title:'Hot Wallet vs Cold Wallet', sub:'Jenis Penyimpanan Aset'},
+      {id:'3-2', title:'Custodial vs Non-Custodial', sub:'Siapa yang Pegang Key?'},
+      {id:'3-3', title:'Seed Phrase & Private Key', sub:'BIP-39 & Key Management'},
+      {id:'3-4', title:'Setup MetaMask', sub:'Praktik Wallet EVM'},
+      {id:'3-5', title:'Smart Contract Wallet & AA', sub:'Account Abstraction'},
+    ]
+  },
+  {
+    phase:4, color:'#f87171', emoji:'📊', title:'Tokenomics',
+    modules:[
+      {id:'4-1', title:'Supply: Circulating, Max, Total', sub:'Konsep Pasokan Token'},
+      {id:'4-2', title:'Market Cap, FDV & Valuasi', sub:'Metrik Harga'},
+      {id:'4-3', title:'Vesting, Cliff & Unlock', sub:'Distribusi Token'},
+      {id:'4-4', title:'Token Utility & Governance', sub:'Fungsi Token'},
+      {id:'4-5', title:'Emission, Inflation & Burn', sub:'Supply Dynamics'},
+      {id:'4-6', title:'Membaca Whitepaper & Tokenomics', sub:'Framework Analisis'},
+    ]
+  },
+  {
+    phase:5, color:'#a78bfa', emoji:'🌐', title:'Ekosistem Web3',
+    modules:[
+      {id:'5-1', title:'DeFi: DEX & AMM', sub:'Decentralized Exchange'},
+      {id:'5-2', title:'Liquidity Pool & LP Token', sub:'Penyedia Likuiditas'},
+      {id:'5-3', title:'Yield Farming & Staking', sub:'Menghasilkan dari DeFi'},
+      {id:'5-4', title:'Lending, Borrowing & Liquidation', sub:'DeFi Credit'},
+      {id:'5-5', title:'Stablecoin', sub:'Fiat-backed, Crypto, Algo'},
+      {id:'5-6', title:'Perpetual & Options DeFi', sub:'Derivatif On-Chain'},
+      {id:'5-7', title:'NFT & Metadata', sub:'Non-Fungible Token'},
+      {id:'5-8', title:'DAO & Governance', sub:'Organisasi Terdesentralisasi'},
+      {id:'5-9', title:'Oracle, Bridge & Infrastruktur', sub:'Tulang Punggung Web3'},
+      {id:'5-10', title:'DePIN, RWA, SocialFi, GameFi', sub:'Sektor Emerging'},
+      {id:'5-11', title:'AI + Web3 & Agent Economy', sub:'Frontier Terdepan'},
+    ]
+  },
+  {
+    phase:6, color:'#38bdf8', emoji:'📝', title:'Smart Contract',
+    modules:[
+      {id:'6-1', title:'Apa itu Smart Contract?', sub:'EVM & Bytecode'},
+      {id:'6-2', title:'Solidity Basics', sub:'Bahasa Smart Contract'},
+      {id:'6-3', title:'Security: Reentrancy & Exploits', sub:'Keamanan Contract'},
+      {id:'6-4', title:'Audit & Proxy Pattern', sub:'Upgradeability'},
+      {id:'6-5', title:'Membaca Verified Contract', sub:'Praktik di Etherscan'},
+    ]
+  },
+  {
+    phase:7, color:'#34d399', emoji:'🔍', title:'On-Chain Analysis',
+    modules:[
+      {id:'7-1', title:'Blockchain Explorer', sub:'Etherscan & Analisis TX'},
+      {id:'7-2', title:'Smart Money & Whale Tracking', sub:'Nansen, Arkham'},
+      {id:'7-3', title:'Exchange Flow Analysis', sub:'Inflow/Outflow Signal'},
+      {id:'7-4', title:'DYOR Research Framework', sub:'Metode Riset Mandiri'},
+      {id:'7-5', title:'Dune Analytics & On-Chain Tools', sub:'Data Kueri & Dashboard'},
+    ]
+  },
+  {
+    phase:8, color:'#f87171', emoji:'🛡', title:'Security & Risk',
+    modules:[
+      {id:'8-1', title:'Rug Pull & Honeypot', sub:'Penipuan Paling Umum'},
+      {id:'8-2', title:'Phishing & Social Engineering', sub:'Serangan Non-Teknis'},
+      {id:'8-3', title:'Approval Exploit & Bridge Hack', sub:'Serangan Teknis'},
+      {id:'8-4', title:'Security Tools & Risk Management', sub:'Revoke, GoPlus, dll'},
+    ]
+  },
+  {
+    phase:9, color:'#fbbf24', emoji:'💼', title:'Web3 Business & VC',
+    modules:[
+      {id:'9-1', title:'VC, Fundraising & Cap Table', sub:'Ekosistem Pendanaan'},
+      {id:'9-2', title:'ICO, IDO, IEO & TGE', sub:'Token Launch Mechanics'},
+      {id:'9-3', title:'Airdrop & Incentive Programs', sub:'Farming & Strategy'},
+    ]
+  },
+  {
+    phase:10, color:'#a78bfa', emoji:'✍️', title:'Content & Personal Brand',
+    modules:[
+      {id:'10-1', title:'Research & Writing Framework', sub:'Alpha Thread & Educational'},
+      {id:'10-2', title:'X (Twitter) Growth Strategy', sub:'Build Audience Web3'},
+      {id:'10-3', title:'Kaito, KOL & Mindshare', sub:'Content Intelligence'},
+    ]
+  },
+  {
+    phase:11, color:'#6c63ff', emoji:'⚡', title:'Advanced Topics',
+    modules:[
+      {id:'11-1', title:'Zero-Knowledge Proofs (ZK)', sub:'ZK-SNARK & ZK-STARK'},
+      {id:'11-2', title:'Modular Blockchain Architecture', sub:'Celestia, EigenDA'},
+      {id:'11-3', title:'Restaking & EigenLayer', sub:'LRT & Risiko'},
+      {id:'11-4', title:'Intent-Based Architecture', sub:'Solver & UniswapX'},
+    ]
+  },
+  {
+    phase:12, color:'#34d399', emoji:'🚀', title:'Build Your Project',
+    modules:[
+      {id:'12-1', title:'Ideation & Tech Stack', sub:'Mulai dari Masalah'},
+      {id:'12-2', title:'Smart Contract Dev & dApp', sub:'End-to-End Build'},
+      {id:'12-3', title:'GTM & Community Building', sub:'Launching Project'},
+    ]
+  },
+];
+
+const MODULE_DATA = {
+  '0-1': {
+    title:'Apa itu Web3?',
+    phase:'Phase 0 — Mindset & Orientasi',
+    desc:'Pemahaman dasar tentang apa yang dimaksud Web3, mengapa ini menjadi revolusi internet berikutnya, dan mengapa kamu perlu memahaminya sekarang.',
+    duration:'45 menit', level:'Pemula Total', updated:'Mei 2025',
+    sections:[
+      {
+        num:1, title:'Konsep Dasar',
+        content:`<p class="prose">Sebelum kita bisa memahami Web3, kamu perlu tahu bahwa internet yang kita gunakan sehari-hari sudah melewati <strong>tiga generasi evolusi besar</strong>.</p>
+        <p class="prose">Bayangkan internet seperti sebuah <em>kota yang terus berkembang</em>. Di awal, kota itu hanya punya jalan-jalan tanpa toko. Kemudian muncul toko-toko besar yang menguasai segalanya. Dan sekarang, orang-orang sedang membangun sistem baru di mana tidak ada satu pun pihak yang bisa menguasai semuanya.</p>
+        <div class="visual-box">
+          <span class="label">🌐 EVOLUSI INTERNET</span>
+          <div class="v-block"><div class="vb-title">WEB 1.0 (1991–2004) — "Read-Only"</div><div class="vb-row"><span>Kontrol</span><span>Publisher/Website Owner</span></div><div class="vb-row"><span>User bisa</span><span>Hanya membaca konten</span></div><div class="vb-row"><span>Contoh</span><span>Website statis, Yahoo Directory</span></div></div>
+          <div class="v-arrow">▼</div>
+          <div class="v-block"><div class="vb-title">WEB 2.0 (2004–Sekarang) — "Read-Write"</div><div class="vb-row"><span>Kontrol</span><span>Platform Besar (Google, Meta, Twitter)</span></div><div class="vb-row"><span>User bisa</span><span>Membaca + Membuat konten</span></div><div class="vb-row"><span>Masalah</span><span>Data & aset milik platform, bukan user</span></div></div>
+          <div class="v-arrow">▼</div>
+          <div class="v-block"><div class="vb-title">WEB 3.0 (2020–Sekarang) — "Read-Write-Own"</div><div class="vb-row"><span>Kontrol</span><span>Komunitas & User sendiri</span></div><div class="vb-row"><span>User bisa</span><span>Membaca + Membuat + <strong>Memiliki</strong></span></div><div class="vb-row"><span>Kunci</span><span>Blockchain, Smart Contract, Token</span></div></div>
+        </div>`
+      },
+      {
+        num:2, title:'Penjelasan Detail',
+        content:`<div class="prose">
+          <p><strong>Web3 adalah versi internet yang dibangun di atas teknologi blockchain</strong>, di mana kepemilikan aset digital, identitas, dan data dikontrol langsung oleh penggunanya — bukan oleh perusahaan platform.</p>
+          <h4>Perbedaan Fundamental Web2 vs Web3:</h4>
+          <ul>
+            <li><strong>Kepemilikan data:</strong> Di Web2, ketika kamu posting di Instagram, foto itu milik Meta. Di Web3, aset digitalmu (token, NFT, dll) benar-benar milikmu secara kriptografis.</li>
+            <li><strong>Izin akses:</strong> Di Web2, akunmu bisa di-ban kapan saja oleh platform. Di Web3, tidak ada pihak tunggal yang bisa melarangmu mengakses protokol.</li>
+            <li><strong>Nilai:</strong> Di Web2, kamu adalah produk (datamu dijual ke pengiklan). Di Web3, kamu bisa mendapat bagian dari nilai yang kamu ciptakan via token.</li>
+            <li><strong>Identitas:</strong> Di Web2, loginmu bergantung pada Google/Facebook. Di Web3, identitasmu adalah wallet address yang kamu kontrol.</li>
+          </ul>
+          <h4>Tiga Pilar Utama Web3:</h4>
+          <ol>
+            <li><strong>Decentralization (Desentralisasi)</strong> — Tidak ada server pusat yang mengontrol segalanya. Data dan logika tersebar di ribuan komputer (node) di seluruh dunia.</li>
+            <li><strong>Trustless System</strong> — Kamu tidak perlu percaya pada perusahaan atau individu. Kamu cukup percaya pada kode (smart contract) yang bisa diverifikasi siapapun.</li>
+            <li><strong>Permissionless</strong> — Siapapun di manapun bisa berpartisipasi tanpa perlu izin dari otoritas manapun.</li>
+          </ol>
+        </div>`
+      },
+      {
+        num:3, title:'Analogi Dunia Nyata',
+        content:`<div class="analogy-card">
+          <p><strong>Bayangkan kamu menyimpan uang di bank (Web2):</strong> Bank yang memegang uangmu, bisa membekukan akunmu, bisa bangkrut, dan menentukan jam operasional. Kamu perlu <em>percaya</em> pada bank.</p>
+          <br>
+          <p><strong>Sekarang bayangkan kamu menyimpan emas di brankas pribadimu (Web3):</strong> Emasnya benar-benar milikmu. Tidak ada bank yang bisa membekukannya. Tidak perlu jam operasional. Kamu tidak perlu percaya pada siapapun — emas itu ada di tanganmu.</p>
+          <br>
+          <p><strong>Web3 adalah brankas digital yang terbuka untuk semua orang, dengan aturan yang ditulis dalam kode, bukan kontrak kertas.</strong></p>
+        </div>`
+      },
+      {
+        num:4, title:'Visualisasi Mental',
+        content:`<div class="visual-box">
+          <span class="label">🏛️ WEB2 vs WEB3 — MODEL KEKUASAAN</span>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px">
+            <div class="v-block" style="border-color:#f87171">
+              <div class="vb-title" style="color:#f87171">❌ WEB2 — Terpusat</div>
+              <div style="text-align:center;padding:8px 0;font-size:12px;color:#a9a8c8">
+                [Google/Meta/Twitter]<br>↓ ↓ ↓<br>User A &nbsp; User B &nbsp; User C<br><br>
+                <span style="color:#f87171">Semua data & kontrol<br>ada di tangan platform</span>
+              </div>
+            </div>
+            <div class="v-block" style="border-color:#34d399">
+              <div class="vb-title" style="color:#34d399">✅ WEB3 — Terdesentralisasi</div>
+              <div style="text-align:center;padding:8px 0;font-size:12px;color:#a9a8c8">
+                User A — User B<br>↕ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ↕<br>User D — User C<br><br>
+                <span style="color:#34d399">Semua peer equal.<br>Protokol = aturan bersama</span>
+              </div>
+            </div>
+          </div>
+        </div>`
+      },
+      {
+        num:5, title:'Istilah Penting',
+        content:`<div class="glossary-grid">
+          <div class="gloss-item"><div class="gloss-term">Web3</div><div class="gloss-def">Generasi internet berbasis blockchain di mana user memiliki aset dan data mereka sendiri.</div></div>
+          <div class="gloss-item"><div class="gloss-term">Blockchain</div><div class="gloss-def">Database terdistribusi yang menyimpan catatan transaksi secara permanen dan tidak bisa diubah.</div></div>
+          <div class="gloss-item"><div class="gloss-term">Desentralisasi</div><div class="gloss-def">Tidak ada otoritas pusat. Kontrol tersebar di antara banyak pihak.</div></div>
+          <div class="gloss-item"><div class="gloss-term">Smart Contract</div><div class="gloss-def">Program komputer yang berjalan otomatis di blockchain ketika kondisi tertentu terpenuhi.</div></div>
+          <div class="gloss-item"><div class="gloss-term">Trustless</div><div class="gloss-def">Sistem yang tidak membutuhkan kepercayaan pada individu/perusahaan karena aturannya dijalankan oleh kode.</div></div>
+          <div class="gloss-item"><div class="gloss-term">Permissionless</div><div class="gloss-def">Siapapun bisa berpartisipasi tanpa perlu persetujuan dari pihak manapun.</div></div>
+          <div class="gloss-item"><div class="gloss-term">Token</div><div class="gloss-def">Aset digital yang merepresentasikan kepemilikan, hak voting, atau nilai dalam ekosistem Web3.</div></div>
+          <div class="gloss-item"><div class="gloss-term">dApp</div><div class="gloss-def">Decentralized Application — aplikasi yang backend-nya berjalan di blockchain, bukan server perusahaan.</div></div>
+        </div>`
+      },
+      {
+        num:6, title:'Contoh Project Nyata',
+        content:`<div class="prose">
+          <h4>Uniswap (DeFi)</h4>
+          <p>Exchange kripto terbesar yang sepenuhnya berjalan di smart contract. Tidak ada CEO yang bisa menutupnya, tidak ada KYC wajib, siapapun di dunia bisa trade 24/7. Trading volume harian bisa mencapai $1–5 miliar.</p>
+          <h4>Ethereum (Blockchain L1)</h4>
+          <p>Platform smart contract terbesar dengan 500.000+ dApp yang berjalan di atasnya. Seperti "App Store" yang tidak bisa dimatikan oleh siapapun.</p>
+          <h4>Nostr (SocialFi/Web3 Social)</h4>
+          <p>Protokol media sosial terdesentralisasi. Bahkan jika server manapun ditutup, kontenmu tetap ada karena tidak terikat satu server.</p>
+        </div>`
+      },
+      {
+        num:7, title:'Use Cases Dunia Nyata',
+        content:`<div class="prose">
+          <ul>
+            <li><strong>Pengiriman uang internasional:</strong> Transfer USDC (stablecoin) ke siapapun di dunia dalam hitungan detik dengan biaya $0.01 — tanpa butuh bank, tanpa batasan jam kerja.</li>
+            <li><strong>Kepemilikan aset digital:</strong> Seniman bisa menjual karya sebagai NFT dan mendapat royalti otomatis setiap kali karya itu dijual kembali.</li>
+            <li><strong>Akses keuangan global:</strong> Seseorang di negara dengan sistem perbankan buruk bisa mengakses pinjaman DeFi hanya dengan wallet.</li>
+            <li><strong>Voting governance:</strong> Pemegang token bisa vote untuk keputusan protokol, seperti pemegang saham tapi lebih transparan.</li>
+          </ul>
+        </div>`
+      },
+      {
+        num:8, title:'Risiko dan Red Flags',
+        content:`<table class="risk-table">
+          <tr><th>Risiko</th><th>Level</th><th>Penjelasan</th></tr>
+          <tr><td>Scam project (rug pull)</td><td><span class="risk-badge risk-high">TINGGI</span></td><td>Banyak project Web3 adalah penipuan. Selalu DYOR sebelum investasi.</td></tr>
+          <tr><td>Volatilitas harga</td><td><span class="risk-badge risk-high">TINGGI</span></td><td>Kripto bisa turun 90% dalam hitungan bulan. Jangan invest lebih dari yang sanggup hilang.</td></tr>
+          <tr><td>Kehilangan private key</td><td><span class="risk-badge risk-high">TINGGI</span></td><td>Jika seed phrase hilang, aset tidak bisa dipulihkan oleh siapapun.</td></tr>
+          <tr><td>Smart contract bug</td><td><span class="risk-badge risk-med">SEDANG</span></td><td>Protocol bisa di-hack jika ada bug. Gunakan protocol yang sudah diaudit.</td></tr>
+          <tr><td>Regulasi</td><td><span class="risk-badge risk-med">SEDANG</span></td><td>Regulasi kripto berbeda di setiap negara dan masih terus berkembang.</td></tr>
+        </table>
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body"><strong>Red Flag Utama:</strong> Jika ada yang menjanjikan "profit pasti", "risk free", atau memintamu untuk share private key/seed phrase — itu 100% scam. Tidak ada pengecualian.</div>
+        </div>`
+      },
+      {
+        num:9, title:'Kesalahan Umum Pemula',
+        content:`<div class="prose">
+          <ol>
+            <li><strong>FOMO (Fear of Missing Out)</strong> — Membeli token hanya karena harganya naik tanpa memahami fundamentalnya.</li>
+            <li><strong>Terlalu percaya influencer</strong> — Banyak KOL (Key Opinion Leader) dibayar untuk promote project tanpa disclosure.</li>
+            <li><strong>Menyimpan seed phrase digital</strong> — Screenshot seed phrase atau menyimpannya di Google Drive adalah kesalahan fatal.</li>
+            <li><strong>Skip security basics</strong> — Langsung ke DeFi/trading tanpa paham cara amankan wallet.</li>
+            <li><strong>Anggap Web3 = cepat kaya</strong> — Mayoritas orang yang masuk dengan mindset ini kehilangan uang mereka.</li>
+          </ol>
+        </div>`
+      },
+      {
+        num:10, title:'Praktik Langsung',
+        content:`<div class="practice-box">
+          <div class="practice-header">
+            <div class="practice-icon">🎯</div>
+            <div><div class="practice-title">Praktik: Eksplorasi Ekosistem Web3 Pertamamu</div>
+            <div class="practice-sub">Tujuan: Melihat dan memahami landscape Web3 secara langsung tanpa risiko</div></div>
+          </div>
+          <p style="font-size:13px;color:#a9a8c8;margin-bottom:14px"><strong>Tools:</strong> Browser biasa (Chrome/Firefox) — tidak perlu wallet dulu</p>
+          <ul class="step-list">
+            <li><div class="step-num">1</div><div class="step-text">Buka <a href="https://defillama.com" target="_blank">https://defillama.com</a> — ini adalah "Bloomberg"-nya DeFi. Lihat berapa total uang yang terkunci di DeFi (TVL = Total Value Locked). Ini menunjukkan skala industri Web3.</div></li>
+            <li><div class="step-num">2</div><div class="step-text">Buka <a href="https://etherscan.io" target="_blank">https://etherscan.io</a> — ini adalah "explorer" blockchain Ethereum. Kamu bisa melihat semua transaksi yang pernah terjadi, secara transparan, tanpa perlu akun.</div></li>
+            <li><div class="step-num">3</div><div class="step-text">Di Etherscan, klik tab "Transactions" di header. Perhatikan betapa banyaknya transaksi yang terjadi setiap detik. Ini semua tercatat permanen di blockchain.</div></li>
+            <li><div class="step-num">4</div><div class="step-text">Buka <a href="https://coingecko.com" target="_blank">https://coingecko.com</a> — explore kategori berbeda: DeFi, Layer 1, Layer 2, AI. Ini memberimu gambaran betapa luasnya ekosistem Web3.</div></li>
+            <li><div class="step-num">5</div><div class="step-text">Tulis di notepad: 3 hal yang kamu temukan menarik dan 3 pertanyaan yang muncul di benakmu. Ini akan menjadi catatan belajarmu.</div></li>
+          </ul>
+          <div class="callout success">
+            <div class="callout-icon">✅</div>
+            <div class="callout-body"><strong>Hasil yang seharusnya muncul:</strong> Kamu melihat TVL DeFi bernilai miliaran dollar, melihat ribuan transaksi Ethereum per menit, dan mulai memiliki gambaran skala industri ini.</div>
+          </div>
+          <div class="callout info">
+            <div class="callout-icon">🔒</div>
+            <div class="callout-body"><strong>Security Checklist:</strong> Pastikan URL yang kamu buka persis sama dengan yang tertulis di atas. Bookmark semua link resmi. Jangan klik iklan yang muncul — banyak iklan palsu di Google untuk situs kripto.</div>
+          </div>
+        </div>`
+      },
+      {
+        num:11, title:'Quiz',
+        content:`<div class="quiz-box">
+          <div class="quiz-q">1. Apa perbedaan utama Web2 vs Web3 dari sisi kepemilikan?</div>
+          <div class="quiz-opts">
+            <div class="quiz-opt" onclick="answerQuiz(this,'wrong','q1')"><div class="quiz-letter">A</div>Web3 lebih cepat dari Web2</div>
+            <div class="quiz-opt" onclick="answerQuiz(this,'correct','q1')"><div class="quiz-letter">B</div>Di Web3, user memiliki aset digitalnya sendiri; di Web2, platform yang memiliki</div>
+            <div class="quiz-opt" onclick="answerQuiz(this,'wrong','q1')"><div class="quiz-letter">C</div>Web3 hanya bisa diakses dengan crypto</div>
+            <div class="quiz-opt" onclick="answerQuiz(this,'wrong','q1')"><div class="quiz-letter">D</div>Web3 adalah nama baru untuk blockchain</div>
+          </div>
+          <div class="quiz-feedback" id="fb-q1"></div>
+        </div>
+        <div class="quiz-box">
+          <div class="quiz-q">2. Apa yang dimaksud "trustless" dalam konteks Web3?</div>
+          <div class="quiz-opts">
+            <div class="quiz-opt" onclick="answerQuiz(this,'wrong','q2')"><div class="quiz-letter">A</div>Tidak ada yang bisa dipercaya di Web3</div>
+            <div class="quiz-opt" onclick="answerQuiz(this,'wrong','q2')"><div class="quiz-letter">B</div>Web3 dijalankan oleh orang yang tidak terpercaya</div>
+            <div class="quiz-opt" onclick="answerQuiz(this,'correct','q2')"><div class="quiz-letter">C</div>Sistem berjalan tanpa perlu mempercayai pihak individu/perusahaan, cukup percaya kode</div>
+            <div class="quiz-opt" onclick="answerQuiz(this,'wrong','q2')"><div class="quiz-letter">D</div>Transaksi bisa dibatalkan kapan saja</div>
+          </div>
+          <div class="quiz-feedback" id="fb-q2"></div>
+        </div>`
+      },
+      {
+        num:12, title:'Studi Kasus',
+        content:`<div class="prose">
+          <h4>Kasus: Pembekuan Rekening di Canada (2022)</h4>
+          <p>Pada Februari 2022, pemerintah Canada membekukan rekening bank peserta demo truk tanpa proses pengadilan, hanya dengan perintah darurat. Rekening lebih dari 200 orang dibekukan dalam hitungan hari.</p>
+          <p>Di saat yang sama, donasi dalam bentuk Bitcoin yang sudah dikirim ke demonstran <strong>tidak bisa dibekukan oleh siapapun</strong> — karena Bitcoin berjalan di jaringan terdesentralisasi yang tidak ada otoritas pusatnya.</p>
+          <p>Ini bukan argumen politik, ini adalah demonstrasi nyata dari perbedaan antara sistem terpusat (bank) dan sistem terdesentralisasi (blockchain): <strong>di blockchain, tidak ada satu pihak pun yang bisa membekukan asetmu secara sepihak.</strong></p>
+        </div>`
+      },
+      {
+        num:13, title:'Latihan',
+        content:`<div class="prose">
+          <ol>
+            <li>Tuliskan 5 layanan Web2 yang kamu gunakan setiap hari. Untuk masing-masing, tanyakan: "Siapa yang sebenarnya memiliki dataku di sini?"</li>
+            <li>Cari di Google: "Web3 use case di Indonesia 2024". Temukan 3 contoh nyata penggunaan Web3 di Indonesia.</li>
+            <li>Baca halaman utama <a href="https://ethereum.org/id" target="_blank" style="color:#38bdf8">https://ethereum.org/id</a> dan tulis dengan kata-katamu sendiri: apa itu Ethereum dalam 3 kalimat?</li>
+          </ol>
+        </div>`
+      },
+      {
+        num:14, title:'Review Questions',
+        content:`<div class="prose">
+          <ol>
+            <li>Apa tiga pilar utama Web3 dan mengapa masing-masing penting?</li>
+            <li>Jelaskan perbedaan antara Web1, Web2, dan Web3 kepada seseorang yang tidak paham teknologi sama sekali.</li>
+            <li>Berikan satu contoh konkret bagaimana Web3 memberi keuntungan dibanding Web2 untuk user biasa.</li>
+            <li>Apa risiko terbesar yang harus dipahami pemula sebelum masuk ke Web3?</li>
+          </ol>
+        </div>`
+      },
+    ],
+    resources:[
+      {title:'Ethereum.org — Apa itu Web3?', cat:'Foundation', type:'Docs', url:'https://ethereum.org/id/web3/', purpose:'Penjelasan resmi & terpercaya tentang Web3', diff:'Pemula', free:true},
+      {title:'DeFi Llama', cat:'Analytics', type:'Tools', url:'https://defillama.com', purpose:'Dashboard TVL dan data DeFi global', diff:'Semua level', free:true},
+      {title:'Etherscan', cat:'Explorer', type:'Tools', url:'https://etherscan.io', purpose:'Blockchain explorer Ethereum — lihat semua transaksi', diff:'Semua level', free:true},
+      {title:'CoinGecko', cat:'Market Data', type:'Tools', url:'https://www.coingecko.com', purpose:'Data harga, market cap, dan info token', diff:'Semua level', free:true},
+      {title:'Bitcoin Whitepaper (asli)', cat:'Foundation', type:'Docs', url:'https://bitcoin.org/bitcoin.pdf', purpose:'Dokumen asli yang memulai seluruh revolusi blockchain', diff:'Intermediate', free:true},
+      {title:'Web3 Foundation', cat:'Foundation', type:'Website', url:'https://web3.foundation', purpose:'Organisasi yang mendanai penelitian Web3', diff:'Semua level', free:true},
+    ],
+    json:{
+      module_name:'Phase 0 — Mindset & Orientasi',
+      topic_name:'Apa itu Web3?',
+      resources:[
+        {title:'Ethereum.org Web3 Explanation',category:'Foundation',type:'Documentation',official_url:'https://ethereum.org/id/web3/',purpose:'Penjelasan resmi Web3 dalam Bahasa Indonesia',difficulty:'Beginner',is_free:true,security_verified:true},
+        {title:'DeFi Llama',category:'Analytics Platform',type:'Tool',official_url:'https://defillama.com',purpose:'Dashboard data DeFi global, TVL tracking',difficulty:'All levels',is_free:true,security_verified:true},
+        {title:'Etherscan',category:'Blockchain Explorer',type:'Tool',official_url:'https://etherscan.io',purpose:'Explore transaksi dan data on-chain Ethereum',difficulty:'All levels',is_free:true,security_verified:true},
+        {title:'CoinGecko',category:'Market Data',type:'Tool',official_url:'https://www.coingecko.com',purpose:'Data pasar kripto komprehensif',difficulty:'All levels',is_free:true,security_verified:true},
+      ]
+    }
+  },
+  '0-2':{
+    title:'Sejarah Internet: Web1→Web2→Web3',
+    phase:'Phase 0 — Mindset & Orientasi',
+    desc:'Memahami bagaimana internet berevolusi dari dokumen statis hingga ekonomi digital terdesentralisasi.',
+    duration:'60 menit', level:'Pemula Total', updated:'Mei 2025',
+    sections:[
+      {
+        num:1, title:'Konsep Dasar',
+        content:`<div class="prose"><p>Untuk benar-benar memahami mengapa Web3 lahir, kita perlu memahami <strong>masalah apa yang coba diselesaikannya</strong>. Dan untuk itu, kita perlu menelusuri sejarah internet dari awal.</p></div>
+        <div class="visual-box"><span class="label">📅 TIMELINE INTERNET</span>
+          <div class="timeline">
+            <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1991</div><div class="tl-title">World Wide Web lahir</div><div class="tl-body">Tim Berners-Lee menciptakan WWW. Internet pertama kali bisa diakses publik.</div></div>
+            <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1995–2004</div><div class="tl-title">Era Web1 — The Static Web</div><div class="tl-body">Website statis, hanya bisa dibaca. Yahoo, AltaVista, AOL mendominasi.</div></div>
+            <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2004</div><div class="tl-title">Web2 dimulai — The Social Web</div><div class="tl-body">Facebook lahir. Era user-generated content. Google, Facebook, Twitter tumbuh.</div></div>
+            <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2008</div><div class="tl-title">Bitcoin Whitepaper</div><div class="tl-body">Satoshi Nakamoto publish whitepaper Bitcoin. Benih Web3 mulai ditanam.</div></div>
+            <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2015</div><div class="tl-title">Ethereum lahir</div><div class="tl-body">Smart contract pertama kali bisa diprogram. Platform untuk dApp terbuka.</div></div>
+            <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2020–Sekarang</div><div class="tl-title">Web3 era dimulai</div><div class="tl-body">DeFi summer 2020. NFT boom 2021. L2 scaling 2022–2024. AI+Web3 2024–2025.</div></div>
+          </div>
+        </div>`
+      },
+      {
+        num:2, title:'Penjelasan Detail',
+        content:`<div class="prose">
+          <h4>WEB 1.0 (1991–2004): Read-Only Web</h4>
+          <p>Web1 adalah era internet pertama. Website adalah halaman statis seperti brosur digital. Tidak ada interaksi, tidak ada login, tidak ada komentar. Kamu hanya bisa <em>membaca</em>.</p>
+          <p>Teknologinya sederhana: HTML statis, tidak ada database, tidak ada JavaScript yang kompleks. Pengalaman internetnya seperti membaca ensiklopedia offline.</p>
+          
+          <h4>WEB 2.0 (2004–Sekarang): Read-Write Web</h4>
+          <p>Web2 adalah revolusi besar. Tiba-tiba user bisa <em>menulis</em> di internet — posting foto, video, status. Ini melahirkan raksasa teknologi: Google, Facebook, Twitter, YouTube, Amazon.</p>
+          <p>Model bisnisnya elegan tapi berbahaya: <strong>layanannya gratis, tapi kamu adalah produknya</strong>. Data perilakumu dijual ke pengiklan. Privacymu dimonetisasi.</p>
+          <p>Masalah Web2:</p>
+          <ul>
+            <li>Platform memiliki semua data user</li>
+            <li>Platform bisa ban akun siapapun tanpa alasan jelas</li>
+            <li>Kreator konten tidak mendapat bagian revenue yang adil</li>
+            <li>Single point of failure — jika server down, semua layanan mati</li>
+            <li>Sensor politik dan korporat</li>
+          </ul>
+
+          <h4>WEB 3.0 (2020–Sekarang): Read-Write-Own Web</h4>
+          <p>Web3 hadir sebagai jawaban atas masalah Web2. Tambahan kata kunci: <strong>OWN</strong> (memiliki). Bukan hanya membaca dan menulis, tapi juga benar-benar memiliki aset, identitas, dan data di internet.</p>
+        </div>`
+      },
+      {
+        num:3, title:'Analogi Dunia Nyata',
+        content:`<div class="analogy-card">
+          <p><strong>Web1</strong> adalah seperti perpustakaan kota. Kamu bisa datang, membaca buku, tapi tidak bisa menulis atau mengubah apapun. Buku-buku sudah ditetapkan oleh pustakawan.</p><br>
+          <p><strong>Web2</strong> adalah seperti mal besar. Kamu bisa datang, belanja, bahkan buka toko di sana — tapi mal yang punya aturan. Sewaktu-waktu tokomu bisa diusir, dan semua data pengunjungmu milik mal, bukan milikmu.</p><br>
+          <p><strong>Web3</strong> adalah seperti pasar tradisional yang tidak punya pemilik tunggal. Setiap pedagang memiliki lapaknya sendiri, aturan dibuat bersama oleh komunitas, tidak ada satu orang pun yang bisa menutup semua lapak sekaligus.</p>
+        </div>`
+      },
+      {num:4, title:'Visualisasi Mental', content:`<div class="visual-box"><span class="label">💡 MODEL KEKUASAAN DI SETIAP ERA</span><div style="font-size:13px;color:#a9a8c8;line-height:2.2"><div><strong style="color:#38bdf8">WEB1:</strong> Publisher → [Internet] → Pembaca pasif</div><div><strong style="color:#a78bfa">WEB2:</strong> User → [Platform Raksasa] → Revenue ke Platform</div><div><strong style="color:#34d399">WEB3:</strong> User ⟷ [Protocol/Smart Contract] ⟷ User (peer to peer)</div><br><div style="color:#f87171">Di Web2: Facebook punya data 3 miliar user</div><div style="color:#34d399">Di Web3: Tidak ada entitas tunggal yang bisa klaim "punya" data user</div></div></div>`},
+      {
+        num:5, title:'Istilah Penting',
+        content:`<div class="glossary-grid">
+          <div class="gloss-item"><div class="gloss-term">WWW (World Wide Web)</div><div class="gloss-def">Sistem dokumen hypertext yang berjalan di atas internet, diciptakan Tim Berners-Lee 1991.</div></div>
+          <div class="gloss-item"><div class="gloss-term">Platform Economy</div><div class="gloss-def">Model bisnis di mana platform menghubungkan user dan mendapat nilai dari interaksi mereka.</div></div>
+          <div class="gloss-item"><div class="gloss-term">Data Monetization</div><div class="gloss-def">Proses menjual atau menggunakan data user untuk menghasilkan pendapatan.</div></div>
+          <div class="gloss-item"><div class="gloss-term">Open Source</div><div class="gloss-def">Software yang kode-nya bisa dilihat, dimodifikasi, dan didistribusikan oleh siapapun.</div></div>
+          <div class="gloss-item"><div class="gloss-term">Protocol</div><div class="gloss-def">Seperangkat aturan yang menentukan bagaimana sistem bekerja. Contoh: HTTP adalah protocol Web.</div></div>
+          <div class="gloss-item"><div class="gloss-term">Satoshi Nakamoto</div><div class="gloss-def">Nama samaran pencipta Bitcoin, identitasnya masih misterius hingga hari ini.</div></div>
+        </div>`
+      },
+      {num:6, title:'Contoh Project Nyata', content:`<div class="prose"><h4>Dari Web2 ke Web3 — Padanannya</h4><ul><li><strong>YouTube (Web2)</strong> → <strong>Lens Protocol / Farcaster (Web3)</strong>: Kreator memiliki konten dan audience mereka sendiri.</li><li><strong>Uber (Web2)</strong> → <strong>Ridesharing DePIN (Web3)</strong>: Driver memiliki bagian dari platform yang mereka bangun.</li><li><strong>Spotify (Web2)</strong> → <strong>Audius (Web3)</strong>: Musisi mendapat revenue langsung tanpa middleman label musik.</li><li><strong>Airbnb (Web2)</strong> → <strong>DAO-owned platforms (Web3)</strong>: Host dan guest yang memiliki dan mengatur platform.</li></ul></div>`},
+      {num:7, title:'Use Cases Dunia Nyata', content:`<div class="prose"><p>Saat ini ekosistem Web3 memproses:<ul><li>Lebih dari $5 triliun transaksi DeFi per tahun</li><li>Jutaan transaksi NFT dengan kreator mendapat royalti otomatis</li><li>Ratusan DAO yang mengelola treasury bernilai miliaran dollar</li><li>Stablecoin yang digunakan sebagai alat pembayaran di negara-negara dengan inflasi tinggi</li></ul></p></div>`},
+      {num:8, title:'Risiko dan Red Flags', content:`<div class="callout warn"><div class="callout-icon">⚠️</div><div class="callout-body"><strong>Web3 bukan solusi untuk semua masalah.</strong> Banyak proyek mengklaim "decentralized" tapi sebenarnya masih dikontrol oleh tim kecil. Ini disebut "decentralization theater" — tampilan desentralisasi palsu.</div></div><div class="callout danger"><div class="callout-icon">🚨</div><div class="callout-body"><strong>Red Flag:</strong> Proyek yang mengklaim "Web3" tapi tidak bisa dijelaskan mengapa mereka butuh blockchain adalah tanda bahaya. Blockchain adalah solusi spesifik, bukan magic word.</div></div>`},
+      {num:9, title:'Kesalahan Umum Pemula', content:`<div class="prose"><ol><li><strong>Mengira Web3 = cryptocurrency saja.</strong> Web3 jauh lebih luas — mencakup DeFi, NFT, DAO, infrastruktur, gaming, identitas digital, dll.</li><li><strong>Mengira semua blockchain sama.</strong> Ethereum, Solana, BNB Chain, Avalanche — masing-masing punya trade-off berbeda.</li><li><strong>Mengira Web3 sudah menggantikan Web2.</strong> Belum. Ini masih fase awal. Saat ini Web3 dan Web2 berjalan berdampingan.</li></ol></div>`},
+      {
+        num:10, title:'Praktik Langsung',
+        content:`<div class="practice-box">
+          <div class="practice-header"><div class="practice-icon">🎯</div><div><div class="practice-title">Praktik: Membandingkan Web2 vs Web3 Platform Secara Langsung</div><div class="practice-sub">Durasi: 20 menit | Tools: Browser</div></div></div>
+          <ul class="step-list">
+            <li><div class="step-num">1</div><div class="step-text">Buka <a href="https://twitter.com" target="_blank">https://twitter.com</a> (Web2). Perhatikan: kamu perlu login, platform bisa ban akunmu, dan tidak ada cara untuk "export" audience-mu.</div></li>
+            <li><div class="step-num">2</div><div class="step-text">Buka <a href="https://warpcast.com" target="_blank">https://warpcast.com</a> (Web3 social — Farcaster protocol). Lihat bagaimana identitas di sini berbasis wallet, bukan email/phone.</div></li>
+            <li><div class="step-num">3</div><div class="step-text">Buka <a href="https://lens.xyz" target="_blank">https://lens.xyz</a> — platform sosial Web3 lainnya. Baca landing page mereka dan pahami value proposition-nya.</div></li>
+            <li><div class="step-num">4</div><div class="step-text">Bandingkan: di platform mana kamu benar-benar "memiliki" audiencemu? Tulis jawabannya.</div></li>
+          </ul>
+        </div>`
+      },
+      {num:11, title:'Quiz', content:`<div class="quiz-box"><div class="quiz-q">Apa model bisnis utama platform Web2 seperti Facebook dan Google?</div><div class="quiz-opts"><div class="quiz-opt" onclick="answerQuiz(this,'wrong','q3')"><div class="quiz-letter">A</div>Subscription bulanan dari semua user</div><div class="quiz-opt" onclick="answerQuiz(this,'correct','q3')"><div class="quiz-letter">B</div>Menjual data dan perhatian user kepada pengiklan</div><div class="quiz-opt" onclick="answerQuiz(this,'wrong','q3')"><div class="quiz-letter">C</div>Biaya transaksi dari setiap interaksi</div><div class="quiz-opt" onclick="answerQuiz(this,'wrong','q3')"><div class="quiz-letter">D</div>Donasi dari komunitas</div></div><div class="quiz-feedback" id="fb-q3"></div></div>`},
+      {num:12, title:'Studi Kasus', content:`<div class="prose"><h4>Kasus: Shutdown MySpace & Hilangnya Konten Jutaan User</h4><p>Pada 2019, MySpace mengumumkan bahwa semua foto, video, dan konten yang diupload antara 2003–2015 — lebih dari 50 juta lagu dari 14 juta artis — <strong>hilang selamanya</strong> akibat kesalahan migrasi server.</p><p>Jutaan kenangan digital, konten kreatif, dan karya artis independen musnah begitu saja karena satu perusahaan membuat satu kesalahan teknis.</p><p>Di Web3, konten yang disimpan di IPFS (InterPlanetary File System) atau on-chain <strong>tidak bisa hilang karena satu server crash</strong> — karena data tersebar di ribuan node di seluruh dunia.</p></div>`},
+      {num:13, title:'Latihan', content:`<div class="prose"><ol><li>Buat timeline sejarah internet versimu sendiri dengan minimal 10 kejadian penting.</li><li>Cari artikel tentang "Cambridge Analytica Facebook scandal" dan jelaskan mengapa itu adalah masalah fundamental Web2.</li><li>Temukan 3 startup Web3 Indonesia yang sedang aktif di 2024-2025.</li></ol></div>`},
+      {num:14, title:'Review Questions', content:`<div class="prose"><ol><li>Mengapa Web2 disebut "jika layanannya gratis, kamu adalah produknya"?</li><li>Apa tiga masalah spesifik Web2 yang coba diselesaikan oleh Web3?</li><li>Apakah Web3 sudah siap menggantikan Web2 sepenuhnya? Jelaskan.</li><li>Apa yang membuat Bitcoin menjadi katalis lahirnya era Web3?</li></ol></div>`},
+    ],
+    resources:[
+      {title:'Ethereum.org — Web3 History', cat:'Foundation', type:'Docs', url:'https://ethereum.org/en/web3/', purpose:'Sejarah dan konteks Web3', diff:'Pemula', free:true},
+      {title:'Warpcast (Farcaster)', cat:'Web3 Social', type:'App', url:'https://warpcast.com', purpose:'Platform sosial Web3 berbasis protokol Farcaster', diff:'Pemula', free:true},
+      {title:'Lens Protocol', cat:'Web3 Social', type:'App', url:'https://lens.xyz', purpose:'Protokol sosial terdesentralisasi di Polygon', diff:'Pemula', free:true},
+      {title:'Web3 Foundation Grants', cat:'Ecosystem', type:'Website', url:'https://web3.foundation/grants/', purpose:'Program grant untuk builder Web3', diff:'Advanced', free:true},
+    ],
+    json:{module_name:'Phase 0',topic_name:'Sejarah Internet Web1→Web2→Web3',resources:[{title:'Ethereum.org Web3',category:'Foundation',type:'Documentation',official_url:'https://ethereum.org/en/web3/',purpose:'Konteks historis Web3',difficulty:'Beginner',is_free:true,security_verified:true}]}
+  },
+  '1-1':{
+    title:'Kriptografi Dasar',
+    phase:'Phase 1 — Fondasi Kriptografi',
+    desc:'Memahami ilmu kriptografi yang menjadi fondasi keamanan seluruh ekosistem blockchain dan Web3.',
+    duration:'75 menit', level:'Beginner', updated:'Mei 2025',
+    sections:[
+      {num:1, title:'Konsep Dasar', content:`<div class="prose"><p>Sebelum blockchain ada, ada <strong>kriptografi</strong>. Tanpa kriptografi, tidak akan ada Bitcoin, tidak akan ada Ethereum, tidak akan ada Web3 sama sekali.</p><p>Kriptografi secara sederhana adalah <em>ilmu tentang menyembunyikan informasi</em> sehingga hanya pihak yang berwenang yang bisa membacanya. Tapi di konteks blockchain, kriptografi punya peran yang jauh lebih luas: membuktikan identitas, memverifikasi data, dan memastikan integritas informasi.</p></div>
+      <div class="visual-box"><span class="label">🔐 TIGA FUNGSI KRIPTOGRAFI DI BLOCKCHAIN</span>
+        <div class="v-block"><div class="vb-title">1. HASHING — Sidik Jari Digital</div><div class="vb-row"><span>Input</span><span>Data apapun (teks, file, transaksi)</span></div><div class="vb-row"><span>Output</span><span>String unik dengan panjang tetap</span></div><div class="vb-row"><span>Sifat</span><span>Satu arah, tidak bisa dibalik</span></div></div>
+        <div class="v-block"><div class="vb-title">2. PUBLIC/PRIVATE KEY — Pasangan Kunci</div><div class="vb-row"><span>Private Key</span><span>Kunci rahasia (hanya kamu yang tahu)</span></div><div class="vb-row"><span>Public Key</span><span>Kunci publik (bisa dibagikan ke siapapun)</span></div></div>
+        <div class="v-block"><div class="vb-title">3. DIGITAL SIGNATURE — Tanda Tangan Digital</div><div class="vb-row"><span>Dibuat dengan</span><span>Private key</span></div><div class="vb-row"><span>Diverifikasi dengan</span><span>Public key</span></div><div class="vb-row"><span>Membuktikan</span><span>Identitas + integritas data</span></div></div>
+      </div>`},
+      {num:2, title:'Penjelasan Detail — Hashing', content:`<div class="prose">
+        <h4>Apa itu Hash Function?</h4>
+        <p>Hash function adalah fungsi matematika yang mengambil input apapun (teks pendek, teks panjang, file besar) dan menghasilkan output dengan panjang tetap yang disebut <strong>hash</strong> atau <strong>digest</strong>.</p>
+        <h4>Contoh nyata SHA-256 (hash function yang dipakai Bitcoin):</h4></div>
+        <div class="visual-box">
+          <div style="font-size:12px;font-family:monospace;line-height:2.2;color:#a9a8c8">
+            <div>Input: <span style="color:#38bdf8">"Hello"</span></div>
+            <div>SHA-256 Output: <span style="color:#34d399">185f8db32921bd46d208e4d420aef...</span></div>
+            <br>
+            <div>Input: <span style="color:#38bdf8">"Hello."</span> (ditambah titik)</div>
+            <div>SHA-256 Output: <span style="color:#f87171">ce3b43af3bcd7b1e68791e5ced4d...</span></div>
+            <br>
+            <div style="color:#fbbf24">⚡ Satu karakter berbeda = hash yang sama sekali berbeda!</div>
+          </div>
+        </div>
+        <div class="prose">
+        <h4>Lima Sifat Kritis Hash Function:</h4>
+        <ol>
+          <li><strong>Deterministic:</strong> Input yang sama SELALU menghasilkan hash yang sama</li>
+          <li><strong>One-way (irreversible):</strong> Tidak bisa dari hash kembali ke input asli</li>
+          <li><strong>Avalanche effect:</strong> Perubahan kecil di input → perubahan besar di hash</li>
+          <li><strong>Fixed length:</strong> Berapapun panjang input, hash selalu sama panjangnya</li>
+          <li><strong>Collision resistant:</strong> Hampir mustahil dua input berbeda menghasilkan hash sama</li>
+        </ol>
+        <h4>Dipakai di mana dalam blockchain?</h4>
+        <ul>
+          <li>Setiap block memiliki hash unik yang merepresentasikan seluruh isinya</li>
+          <li>Setiap block menyimpan hash dari block sebelumnya (membentuk chain)</li>
+          <li>Jika seseorang mengubah satu transaksi lama → hash block berubah → seluruh chain setelahnya invalid</li>
+        </ul>
+        </div>`},
+      {num:3, title:'Analogi Dunia Nyata', content:`<div class="analogy-card">
+        <p><strong>Hash function seperti mesin penghancur dokumen canggih:</strong></p>
+        <p>Kamu bisa memasukkan dokumen apapun — satu halaman atau seribu halaman — ke mesin ini, dan mesin akan menghasilkan "kode sidik jari" 64 karakter. Dokumen yang berbeda menghasilkan kode yang berbeda. Dan kamu <em>tidak bisa merekonstruksi dokumen asli dari kode tersebut</em>.</p><br>
+        <p>Tapi setiap kali kamu memasukkan dokumen yang SAMA, kode yang keluar selalu SAMA. Ini yang membuat hash berguna untuk verifikasi: "apakah dokumen ini sudah diubah?"</p>
+      </div>`},
+      {num:4, title:'Visualisasi Mental — Blockchain sebagai Chain of Hashes', content:`<div class="visual-box"><span class="label">⛓️ BAGAIMANA HASH MEMBENTUK BLOCKCHAIN</span>
+        <div class="v-block"><div class="vb-title">BLOCK #1 (Genesis Block)</div><div class="vb-row"><span>Data</span><span>Transaksi A, B, C</span></div><div class="vb-row"><span>Hash Block ini</span><span style="color:#34d399">0000abc123...</span></div><div class="vb-row"><span>Hash Prev Block</span><span>0000000000 (tidak ada)</span></div></div>
+        <div class="v-arrow">▼ Block #1 hash menjadi referensi Block #2</div>
+        <div class="v-block"><div class="vb-title">BLOCK #2</div><div class="vb-row"><span>Data</span><span>Transaksi D, E, F</span></div><div class="vb-row"><span>Hash Block ini</span><span style="color:#34d399">0000def456...</span></div><div class="vb-row"><span>Hash Prev Block</span><span style="color:#38bdf8">0000abc123... ← dari Block #1</span></div></div>
+        <div class="v-arrow">▼</div>
+        <div class="v-block" style="border-color:#f87171"><div class="vb-title" style="color:#f87171">⚠️ Jika Block #1 diubah:</div><div class="vb-row"><span>Hash Block #1 berubah</span><span style="color:#f87171">menjadi xyz999...</span></div><div class="vb-row"><span>Block #2 invalid</span><span style="color:#f87171">karena hash prev tidak cocok</span></div><div class="vb-row"><span>Semua block setelahnya</span><span style="color:#f87171">juga invalid</span></div></div>
+        <div style="margin-top:10px;font-size:12px;color:#34d399">✅ Inilah mengapa blockchain bersifat IMMUTABLE (tidak bisa diubah)</div>
+      </div>`},
+      {num:5, title:'Istilah Penting', content:`<div class="glossary-grid">
+        <div class="gloss-item"><div class="gloss-term">Hash / Digest</div><div class="gloss-def">Output berupa string unik yang dihasilkan dari hash function. Seperti "sidik jari digital" suatu data.</div></div>
+        <div class="gloss-item"><div class="gloss-term">SHA-256</div><div class="gloss-def">Secure Hash Algorithm 256-bit. Hash function yang digunakan Bitcoin. Menghasilkan hash 64 karakter hex.</div></div>
+        <div class="gloss-item"><div class="gloss-term">Keccak-256</div><div class="gloss-def">Hash function yang digunakan Ethereum. Varian SHA-3 yang dimodifikasi.</div></div>
+        <div class="gloss-item"><div class="gloss-term">Collision</div><div class="gloss-def">Kondisi di mana dua input berbeda menghasilkan hash yang sama. Hal yang (hampir) mustahil terjadi di SHA-256.</div></div>
+        <div class="gloss-item"><div class="gloss-term">Preimage Attack</div><div class="gloss-def">Upaya untuk menemukan input asli dari sebuah hash. Hash function yang baik sangat resisten terhadap ini.</div></div>
+        <div class="gloss-item"><div class="gloss-term">Merkle Tree</div><div class="gloss-def">Struktur data berbentuk pohon di mana setiap node adalah hash dari child-nya. Digunakan untuk efisiensi verifikasi transaksi di blockchain.</div></div>
+      </div>`},
+      {num:6, title:'Contoh Project Nyata', content:`<div class="prose"><h4>Bitcoin Mining & SHA-256</h4><p>Miner Bitcoin harus menemukan input (disebut "nonce") yang ketika di-hash dengan SHA-256 menghasilkan hash yang dimulai dengan sejumlah angka nol tertentu. Ini seperti melempar dadu jutaan kali sampai mendapat angka yang tepat. Kesulitan ini yang membuat blockchain aman dan membutuhkan energi komputasi besar.</p><h4>Git (bukan blockchain tapi pakai hashing)</h4><p>Git, tool yang dipakai programmer, menggunakan SHA-1 untuk hash setiap commit. Setiap perubahan kode menghasilkan hash unik — inilah yang memungkinkan version control yang akurat.</p></div>`},
+      {num:7, title:'Use Cases Dunia Nyata', content:`<div class="prose"><ul><li><strong>Verifikasi file download:</strong> Website menyediakan hash file yang bisa kamu verifikasi setelah download — jika hash cocok, file tidak dimodifikasi.</li><li><strong>Password storage:</strong> Database tidak menyimpan password asli, tapi hash-nya. Saat login, password-mu di-hash dan dibandingkan.</li><li><strong>Blockchain integrity:</strong> Setiap node memverifikasi integritas chain dengan membandingkan hash.</li></ul></div>`},
+      {num:8, title:'Risiko dan Red Flags', content:`<div class="callout warn"><div class="callout-icon">⚠️</div><div class="callout-body"><strong>Hash lama bisa rusak:</strong> MD5 dan SHA-1 sudah terbukti punya kelemahan. Jangan gunakan hash function yang sudah deprecated untuk keamanan kritis. Gunakan SHA-256 atau lebih kuat.</div></div>`},
+      {num:9, title:'Kesalahan Umum Pemula', content:`<div class="prose"><ol><li><strong>Mengira hash = enkripsi.</strong> Hash adalah one-way, enkripsi adalah two-way. Hashed data tidak bisa di-decrypt, tapi encrypted data bisa di-decrypt dengan key yang benar.</li><li><strong>Mengira hash sama = data sama.</strong> Benar, tapi perlu dipastikan hash function-nya juga sama.</li></ol></div>`},
+      {
+        num:10, title:'Praktik Langsung',
+        content:`<div class="practice-box">
+          <div class="practice-header"><div class="practice-icon">⚗️</div><div><div class="practice-title">Praktik: Eksperimen SHA-256 Secara Langsung</div><div class="practice-sub">Tujuan: Merasakan sendiri sifat hash function</div></div></div>
+          <p style="font-size:13px;color:#a9a8c8;margin-bottom:14px"><strong>Tools:</strong> Online SHA-256 tool — tidak perlu install apapun</p>
+          <ul class="step-list">
+            <li><div class="step-num">1</div><div class="step-text">Buka <a href="https://emn178.github.io/online-tools/sha256.html" target="_blank">https://emn178.github.io/online-tools/sha256.html</a></div></li>
+            <li><div class="step-num">2</div><div class="step-text">Ketik: <code>Halo dunia</code> dan perhatikan hash yang muncul. Catat hash-nya.</div></li>
+            <li><div class="step-num">3</div><div class="step-text">Ubah satu huruf: ketik <code>halo dunia</code> (huruf h kecil). Lihat betapa berbedanya hash yang dihasilkan.</div></li>
+            <li><div class="step-num">4</div><div class="step-text">Ketik kembali <code>Halo dunia</code> (persis sama). Verifikasi bahwa hash-nya identik dengan langkah 2. Ini membuktikan: <em>input sama selalu menghasilkan hash yang sama</em>.</div></li>
+            <li><div class="step-num">5</div><div class="step-text">Coba input sangat panjang (paste paragraf artikel). Perhatikan: panjang hash tetap 64 karakter meskipun inputnya ribuan karakter.</div></li>
+          </ul>
+          <div class="callout success"><div class="callout-icon">✅</div><div class="callout-body"><strong>Yang harus kamu pahami setelah praktik ini:</strong> Satu karakter berbeda menghasilkan hash yang sama sekali berbeda. Hash selalu panjang 64 karakter. Input sama = hash sama selalu.</div></div>
+        </div>`
+      },
+      {num:11, title:'Quiz', content:`<div class="quiz-box"><div class="quiz-q">Jika seseorang mengetahui hash "abc123...", apakah mereka bisa mengetahui input aslinya?</div><div class="quiz-opts"><div class="quiz-opt" onclick="answerQuiz(this,'correct','q4')"><div class="quiz-letter">A</div>Tidak — hash adalah one-way function, tidak bisa dibalik</div><div class="quiz-opt" onclick="answerQuiz(this,'wrong','q4')"><div class="quiz-letter">B</div>Ya — dengan dekripsi yang tepat</div><div class="quiz-opt" onclick="answerQuiz(this,'wrong','q4')"><div class="quiz-letter">C</div>Tergantung panjang hash-nya</div><div class="quiz-opt" onclick="answerQuiz(this,'wrong','q4')"><div class="quiz-letter">D</div>Bisa, tapi membutuhkan private key</div></div><div class="quiz-feedback" id="fb-q4"></div></div>`},
+      {num:12, title:'Studi Kasus', content:`<div class="prose"><h4>Kasus: Bitcoin Block Hash</h4><p>Setiap Bitcoin block memiliki hash yang dimulai dengan banyak angka nol. Misalnya Block #800000 punya hash: <code style="color:#34d399;font-size:12px">000000000000000000023bff7e8a...b4a2f3c7</code></p><p>Untuk menemukan hash seperti ini, miner harus mencoba miliaran kombinasi nonce per detik. Ketika ditemukan, semua node bisa memverifikasi kebenaran hash tersebut hanya dalam microsecond — ini adalah <strong>asymmetry of proof of work</strong>: sulit membuat, mudah verifikasi.</p></div>`},
+      {num:13, title:'Latihan', content:`<div class="prose"><ol><li>Gunakan tool SHA-256 online, hash namamu sendiri 3x. Verifikasi hasilnya selalu sama.</li><li>Hash kalimat "Saya belajar Web3" dan "Saya belajar web3" (perbedaan huruf kapital W). Dokumentasikan hasilnya.</li><li>Cari: "SHA-256 collision attack" — apakah SHA-256 pernah berhasil di-collision attack? Apa yang kamu temukan?</li></ol></div>`},
+      {num:14, title:'Review Questions', content:`<div class="prose"><ol><li>Jelaskan lima sifat utama hash function dan mengapa masing-masing penting untuk keamanan blockchain.</li><li>Bagaimana hashing membuat blockchain bersifat immutable?</li><li>Apa perbedaan antara hashing dan enkripsi?</li><li>Mengapa blockchain menggunakan hash dari block sebelumnya di setiap block baru?</li></ol></div>`},
+    ],
+    resources:[
+      {title:'SHA-256 Online Tool', cat:'Practice Tool', type:'Tool', url:'https://emn178.github.io/online-tools/sha256.html', purpose:'Eksperimen SHA-256 secara langsung di browser', diff:'Pemula', free:true},
+      {title:'Andersbrownworth Hash Demo', cat:'Visualisasi', type:'Tool', url:'https://andersbrownworth.com/blockchain/hash', purpose:'Visualisasi interaktif bagaimana hash bekerja di blockchain', diff:'Pemula', free:true},
+      {title:'Andersbrownworth Blockchain Demo', cat:'Visualisasi', type:'Tool', url:'https://andersbrownworth.com/blockchain/', purpose:'Demo interaktif blockchain, block, mining secara visual', diff:'Pemula', free:true},
+      {title:'NIST Hash Standards', cat:'Standard', type:'Docs', url:'https://csrc.nist.gov/projects/hash-functions', purpose:'Standar resmi hash function dari NIST', diff:'Advanced', free:true},
+    ],
+    json:{module_name:'Phase 1 — Fondasi Kriptografi',topic_name:'Kriptografi Dasar & Hashing',resources:[{title:'SHA-256 Online Tool',category:'Practice',type:'Tool',official_url:'https://emn178.github.io/online-tools/sha256.html',purpose:'Eksperimen langsung SHA-256',difficulty:'Beginner',is_free:true,security_verified:true},{title:'Anders Brownworth Blockchain Demo',category:'Visualization',type:'Interactive Tool',official_url:'https://andersbrownworth.com/blockchain/',purpose:'Visualisasi interaktif blockchain dan hashing',difficulty:'Beginner',is_free:true,security_verified:true}]}
+  },
+};
+
+let completed = JSON.parse(localStorage.getItem('w3m_completed') || '[]');
+let currentModule = null;
+
+function getModuleIds(){
+  return CURRICULUM.flatMap(p=>p.modules.map(m=>m.id));
+}
+
+function updateProgress(){
+  const all = getModuleIds().length;
+  const done = completed.length;
+  const pct = Math.round(done/all*100);
+  document.getElementById('progText').textContent = `${done}/${all} modul`;
+  document.getElementById('progFill').style.width = pct+'%';
+}
+
+function buildSidebar(){
+  const c = document.getElementById('sidebarContent');
+  c.innerHTML = '';
+  CURRICULUM.forEach(ph=>{
+    const grp = document.createElement('div');
+    grp.className='phase-group';
+    const tog = document.createElement('div');
+    tog.className='phase-toggle';
+    tog.innerHTML=`<div class="ph-icon" style="background:${ph.color}20;color:${ph.color}">${ph.emoji}</div>Phase ${ph.phase}<span class="arr">▶</span>`;
+    tog.onclick=()=>{tog.classList.toggle('open')};
+    const mods = document.createElement('div');
+    mods.className='phase-modules';
+    ph.modules.forEach(m=>{
+      const lk = document.createElement('div');
+      lk.className='mod-link'+(completed.includes(m.id)?' completed':'');
+      lk.id='ml-'+m.id;
+      lk.innerHTML=`<span style="flex:1;font-size:12px">${m.title}</span><div class="done-icon">${completed.includes(m.id)?'✓':''}</div>`;
+      lk.onclick=()=>loadModule(m.id);
+      mods.appendChild(lk);
+    });
+    grp.appendChild(tog);
+    grp.appendChild(mods);
+    c.appendChild(grp);
+  });
+}
+
+function buildOverview(){
+  let html = `
+  <div class="hero">
+    <div class="hero-badge">⬡ Web3 Mastery Curriculum 2025</div>
+    <h1>Belajar Web3<br>dari Nol ke Expert</h1>
+    <p>Kurikulum sistematis, mendalam, dengan praktik langsung — dirancang untuk mengubahmu dari pemula total menjadi Web3 expert.</p>
+    <button class="start-btn" onclick="loadModule('0-1')">🚀 Mulai dari Awal</button>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">13</div><div class="lbl">Phase</div></div>
+      <div class="hero-stat"><div class="num">48</div><div class="lbl">Modul</div></div>
+      <div class="hero-stat"><div class="num">200+</div><div class="lbl">Link Resmi</div></div>
+      <div class="hero-stat"><div class="num">6 bln</div><div class="lbl">Est. Selesai</div></div>
+    </div>
+  </div>
+  <div class="phase-grid">`;
+  CURRICULUM.forEach(ph=>{
+    const total = ph.modules.length;
+    const done = ph.modules.filter(m=>completed.includes(m.id)).length;
+    const pct = Math.round(done/total*100);
+    html+=`<div class="phase-card" onclick="openPhase(${ph.phase})">
+      <div class="phase-card-icon" style="background:${ph.color}20;color:${ph.color};font-size:22px">${ph.emoji}</div>
+      <div class="phase-card-title">Phase ${ph.phase}: ${ph.title}</div>
+      <div class="phase-card-sub">${total} modul · ${ph.modules[0].sub}</div>
+      <div style="font-size:11px;color:#6b6a8a;margin-bottom:6px">${done}/${total} selesai</div>
+      <div class="phase-card-prog"><div class="phase-card-prog-fill" style="width:${pct}%"></div></div>
+    </div>`;
+  });
+  html+='</div>';
+  document.getElementById('mainContent').innerHTML = html;
+}
+
+function openPhase(phaseNum){
+  const ph = CURRICULUM.find(p=>p.phase===phaseNum);
+  if(!ph) return;
+  const firstId = ph.modules[0].id;
+  if(MODULE_DATA[firstId]) loadModule(firstId);
+  else {
+    document.getElementById('mainContent').innerHTML=`<div class="module-content"><div class="section-label">${ph.emoji} Phase ${ph.phase}</div><h2 class="module-title">${ph.title}</h2><p class="module-desc">Pilih modul di sidebar untuk mulai belajar.</p><div class="phase-grid" style="padding:0">` +
+    ph.modules.map(m=>`<div class="phase-card" onclick="loadModule('${m.id}')"><div class="phase-card-title">${m.title}</div><div class="phase-card-sub">${m.sub}</div><div class="phase-card-prog"><div class="phase-card-prog-fill" style="width:${completed.includes(m.id)?100:0}%"></div></div></div>`).join('')+`</div></div>`;
+  }
+}
+
+function loadModule(id){
+  currentModule = id;
+  document.querySelectorAll('.mod-link').forEach(el=>{
+    el.classList.remove('active');
+    if(el.id==='ml-'+id) el.classList.add('active');
+  });
+  const ph = CURRICULUM.find(p=>p.modules.some(m=>m.id===id));
+  if(ph){
+    const tog = document.querySelector(`[onclick="openPhase(${ph.phase})"]`);
+    const sidebar = document.getElementById('sidebarContent');
+    const grps = sidebar.querySelectorAll('.phase-toggle');
+    grps.forEach((g,i)=>{if(CURRICULUM[i]&&CURRICULUM[i].phase===ph.phase){g.classList.add('open')}});
+  }
+  if(MODULE_DATA[id]){
+    renderModule(MODULE_DATA[id], id);
+  } else {
+    const phData = CURRICULUM.flatMap(p=>p.modules).find(m=>m.id===id);
+    document.getElementById('mainContent').innerHTML=`<div class="module-content">
+      <div class="section-label">${ph?ph.emoji+' Phase '+ph.phase+' — '+ph.title:''}</div>
+      <h1 class="module-title">${phData?phData.title:'Modul '+id}</h1>
+      <p class="module-desc">${phData?phData.sub:''}</p>
+      <div class="callout info"><div class="callout-icon">📚</div><div class="callout-body"><strong>Modul ini sedang dalam pengembangan.</strong> Konten lengkap akan segera tersedia. Gunakan sidebar untuk navigasi ke modul yang sudah siap.</div></div>
+      <div class="mod-nav">${getPrevNext(id)}</div>
+    </div>`;
+  }
+  window.scrollTo(0,0);
+}
+
+function renderModule(data, id){
+  let sectionsHtml = '';
+  data.sections.forEach(s=>{
+    sectionsHtml+=`<div class="content-block">
+      <div class="block-title"><div class="block-num">${s.num}</div>${s.title}</div>
+      ${s.content}
+    </div>`;
+  });
+
+  let resHtml = '';
+  if(data.resources){
+    resHtml=`<div class="content-block">
+      <div class="block-title"><div class="block-num">📎</div>Resources & Practice Links</div>
+      <table class="res-table">
+        <tr><th>Resource</th><th>Kategori</th><th>Link Resmi</th><th>Akses</th></tr>
+        ${data.resources.map(r=>`<tr><td><strong>${r.title}</strong><br><span style="font-size:11px;color:#6b6a8a">${r.purpose}</span></td><td><span class="tag tag-docs">${r.cat}</span></td><td><a href="${r.url}" target="_blank">${r.url}</a></td><td><span class="tag ${r.free?'tag-free':'tag-paid'}">${r.free?'Gratis':'Berbayar'}</span></td></tr>`).join('')}
+      </table>
+    </div>`;
+  }
+
+  let jsonHtml='';
+  if(data.json){
+    const j=JSON.stringify(data.json,null,2);
+    const colored=j.replace(/"([^"]+)":/g,'<span class="json-key">"$1"</span><span class="json-punc">:</span>')
+      .replace(/: "([^"]+)"/g,': <span class="json-str">"$1"</span>')
+      .replace(/: (true|false)/g,': <span class="json-bool">$1</span>')
+      .replace(/: (\d+)/g,': <span class="json-num">$1</span>');
+    jsonHtml=`<div class="content-block">
+      <div class="block-title"><div class="block-num">{ }</div>JSON Resource Format</div>
+      <div class="json-block"><button class="copy-btn" onclick="copyJson(this,'${id}')">Copy JSON</button><pre style="margin:0">${colored}</pre></div>
+    </div>`;
+  }
+
+  const isDone = completed.includes(id);
+  const ph = CURRICULUM.find(p=>p.modules.some(m=>m.id===id));
+
+  document.getElementById('mainContent').innerHTML=`<div class="module-content">
+    <div class="section-label">${ph?ph.emoji+' '+data.phase:''}</div>
+    <h1 class="module-title">${data.title}</h1>
+    <p class="module-desc">${data.desc}</p>
+    <div class="module-meta">
+      <div class="meta-badge">⏱ <span>${data.duration}</span></div>
+      <div class="meta-badge">📊 <span>${data.level}</span></div>
+      <div class="meta-badge">📅 Update: <span>${data.updated}</span></div>
+      ${isDone?'<div class="meta-badge" style="color:#34d399;border-color:#34d399">✓ Selesai</div>':''}
+    </div>
+    ${sectionsHtml}
+    ${resHtml}
+    ${jsonHtml}
+    <button class="mod-complete-btn ${isDone?'done':''}" id="completeBtn" onclick="markComplete('${id}')">
+      ${isDone?'✓ Modul Selesai — Lanjut ke Berikutnya →':'✅ Tandai Modul Ini Selesai'}
+    </button>
+    <div class="mod-nav">${getPrevNext(id)}</div>
+  </div>`;
+}
+
+function getPrevNext(id){
+  const all = getModuleIds();
+  const idx = all.indexOf(id);
+  let prev='', next='';
+  if(idx>0){
+    const pid=all[idx-1];
+    const pm=CURRICULUM.flatMap(p=>p.modules).find(m=>m.id===pid);
+    prev=`<button class="mod-nav-btn" onclick="loadModule('${pid}')"><span>←</span><div><div class="nav-label">Sebelumnya</div><div class="nav-name">${pm?pm.title:pid}</div></div></button>`;
+  }
+  if(idx<all.length-1){
+    const nid=all[idx+1];
+    const nm=CURRICULUM.flatMap(p=>p.modules).find(m=>m.id===nid);
+    next=`<button class="mod-nav-btn next" onclick="loadModule('${nid}')"><div><div class="nav-label">Berikutnya</div><div class="nav-name">${nm?nm.title:nid}</div></div><span>→</span></button>`;
+  }
+  return prev+next;
+}
+
+function markComplete(id){
+  if(!completed.includes(id)){
+    completed.push(id);
+    localStorage.setItem('w3m_completed', JSON.stringify(completed));
+  }
+  updateProgress();
+  buildSidebar();
+  const all=getModuleIds();
+  const idx=all.indexOf(id);
+  if(idx<all.length-1){
+    setTimeout(()=>loadModule(all[idx+1]),300);
+  } else {
+    document.getElementById('completeBtn').textContent='✓ Semua Modul Selesai! 🎉';
+    document.getElementById('completeBtn').classList.add('done');
+  }
+}
+
+function answerQuiz(el, correctness, qid){
+  const box = el.parentElement;
+  if(box.dataset.answered) return;
+  box.dataset.answered='1';
+  el.classList.add(correctness==='correct'?'correct':'wrong');
+  const fb = document.getElementById('fb-'+qid);
+  if(fb){
+    fb.classList.add('show');
+    if(correctness==='correct'){
+      fb.classList.add('ok');
+      fb.innerHTML='✅ <strong>Benar!</strong> Pemahaman yang tepat.';
+    } else {
+      fb.classList.add('bad');
+      fb.innerHTML='❌ <strong>Belum tepat.</strong> Coba baca kembali bagian penjelasan detail di atas.';
+      box.querySelectorAll('.quiz-opt').forEach(o=>{
+        if(o.dataset.correct||o.innerHTML.includes('correct')){/* highlight correct if needed */}
+      });
+    }
+  }
+}
+
+function copyJson(btn, id){
+  const data = MODULE_DATA[id];
+  if(data&&data.json){
+    navigator.clipboard.writeText(JSON.stringify(data.json,null,2));
+    btn.textContent='Copied!';
+    setTimeout(()=>btn.textContent='Copy JSON',2000);
+  }
+}
+
+function searchModules(){
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  if(!q){buildSidebar();return;}
+  const c = document.getElementById('sidebarContent');
+  c.innerHTML='<div class="sidebar-header">Hasil Pencarian</div>';
+  CURRICULUM.forEach(ph=>{
+    ph.modules.filter(m=>m.title.toLowerCase().includes(q)||m.sub.toLowerCase().includes(q)).forEach(m=>{
+      const lk=document.createElement('div');
+      lk.className='mod-link';
+      lk.innerHTML=`<span style="flex:1;font-size:12px">${m.title}</span>`;
+      lk.onclick=()=>loadModule(m.id);
+      c.appendChild(lk);
+    });
+  });
+}
+
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('open');
+}
+
+function openLink(url){window.open(url,'_blank')}
+
+buildSidebar();
+buildOverview();
+updateProgress();
+</script>
+</body>
+</html>
